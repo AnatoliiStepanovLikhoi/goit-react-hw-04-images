@@ -1,50 +1,39 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import { SearchBar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 
-export class App extends Component {
-  state = {
-    currentPage: 1,
-    inputRequest: '',
-  };
+export const App = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [inputRequest, setInputRequest] = useState('');
 
-  onInputSubmit = inputRequest => {
-    const normalizedInputRequest = inputRequest.trim().toLowerCase();
+  const onInputSubmit = inputQuery => {
+    const normalizedInputRequest = inputQuery.trim().toLowerCase();
 
-    console.log(normalizedInputRequest);
-
-    if (
-      !normalizedInputRequest ||
-      this.state.inputRequest === normalizedInputRequest
-    ) {
+    if (!normalizedInputRequest || inputRequest === normalizedInputRequest) {
       return;
     }
 
-    this.setState({
-      currentPage: 1,
-      inputRequest: normalizedInputRequest,
-    });
+    setCurrentPage(1);
+    setInputRequest(normalizedInputRequest);
   };
 
-  onLoadMoreClick = () => {
-    this.setState(prevState => ({
-      currentPage: prevState.currentPage + 1,
-    }));
+  const onLoadMoreClick = () => {
+    setCurrentPage(prevState => prevState + 1);
   };
 
-  render() {
-    return (
-      <div>
-        <SearchBar onSubmit={this.onInputSubmit} />
+  return (
+    <div>
+      <SearchBar onSubmit={onInputSubmit} />
 
-        <ImageGallery
-          currentPage={this.state.currentPage}
-          inputRequest={this.state.inputRequest}
-          onLoadMore={this.onLoadMoreClick}
-        />
+      <ImageGallery
+        currentPage={currentPage}
+        inputRequest={inputRequest}
+        onLoadMore={onLoadMoreClick}
+      />
 
-        {/* <button type="button" onClick={this.toggleModal}>
+      {/* <button type="button" onClick={this.toggleModal}>
           Open modal
         </button>
 
@@ -61,7 +50,6 @@ export class App extends Component {
             </button>
           </Modal>
         )} */}
-      </div>
-    );
-  }
-}
+    </div>
+  );
+};
