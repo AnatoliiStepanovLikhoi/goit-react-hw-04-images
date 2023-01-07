@@ -14,6 +14,8 @@ export const App = () => {
       return;
     }
 
+    // console.log(normalizedInputRequest);
+
     setCurrentPage(1);
     setInputRequest(normalizedInputRequest);
   };

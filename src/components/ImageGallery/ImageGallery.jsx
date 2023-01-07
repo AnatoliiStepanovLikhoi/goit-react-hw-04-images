@@ -24,6 +24,12 @@ export const ImageGallery = ({ inputRequest, currentPage, onLoadMore }) => {
   const [totalHits, setTotalHits] = useState(0);
 
   useEffect(() => {
+    if (status === 'idle') {
+      return Notify.success('Please, fill your request!');
+    }
+  }, [status]);
+
+  useEffect(() => {
     if (!inputRequest) return;
 
     setStatus('pending');
@@ -46,10 +52,10 @@ export const ImageGallery = ({ inputRequest, currentPage, onLoadMore }) => {
       .catch(() => setStatus('rejected'));
   }, [currentPage, inputRequest]);
 
-  if (status === 'idle') {
-    // console.log('render');
-    return Notify.success('Please, fill your request!');
-  }
+  // if (status === 'idle') {
+  //   // console.log('render');
+  //   return Notify.success('Please, fill your request!');
+  // }
 
   if (status === 'pending' && totalHits === 0) {
     // console.log('search');
@@ -63,6 +69,7 @@ export const ImageGallery = ({ inputRequest, currentPage, onLoadMore }) => {
   }
 
   if (status === 'failed') {
+    console.log('failed');
     return Notify.failure('Sorry, we found no images(');
   }
 
