@@ -1,4 +1,3 @@
-// import { Component } from 'react';
 // import { useEffect } from 'react';
 // import { useState } from 'react';
 import { createPortal } from 'react-dom';
