@@ -30,7 +30,9 @@ export const ImageGallery = ({ inputRequest, currentPage, onLoadMore }) => {
 
     fetchData(inputRequest, currentPage)
       .then(fetchImages => {
-        if (fetchImages.hits.length === 0) return setStatus('failed');
+        if (fetchImages.hits.length === 0) {
+          return setStatus('failed');
+        }
 
         setGalleryHits(prevState =>
           currentPage === 1

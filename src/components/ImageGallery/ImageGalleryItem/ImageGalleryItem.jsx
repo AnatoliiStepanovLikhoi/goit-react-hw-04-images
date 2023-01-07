@@ -10,6 +10,8 @@ export const ImageGalleryItem = ({ basicImage, largeImage, tag }) => {
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
+    if (onkeydown) onkeydown = false;
+
     setModal(!modal);
   };
 
